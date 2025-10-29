@@ -13,9 +13,23 @@ function parseTweets(runkeeper_tweets) {
 	//It works correctly, your task is to update the text of the other tags in the HTML file!
 	document.getElementById('numberTweets').innerText = tweet_array.length;	
 
-	let dates = tweet_array.map(tweet => new Date(tweet.time))
+	let dates = tweet_array.map(tweet => new Date(tweet.time));
 
-	
+	let earliestdate = new Date(tweet_array[0].time);
+	let latestdate = new Date(tweet_array[0].time);
+
+	for (let i = 1; i < tweet.array_length; ++i) {
+		let currentDate = new Date(tweet_array[i].time);
+
+		if (currentDate < earliestdate) {
+			earliestdate = currentDate;
+		}
+
+		if (currentDate > latestdate) {
+			latestdate = currentDate;
+		}
+	}
+	const options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
 }
 
 //Wait for the DOM to load
