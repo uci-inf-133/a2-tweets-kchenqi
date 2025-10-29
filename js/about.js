@@ -57,7 +57,21 @@ function parseTweets(runkeeper_tweets) {
 		}
 	}
 	
-	document.getElementsByClassName("completedEvents").innerText = completed;
+	function percentages(count, total) {
+		return math.format(((count / total)*100), {notation: "fixed", precision: 2}) + "%";
+	}
+
+	document.getElementsByClassName("completedEvents")[0].innerText = completedevents;
+	document.getElementsByClassName("completedEventsPct")[0].innerText = percentages(completedevents, tweet_array.length);
+
+	document.getElementsByClassName("liveEvents")[0].innerText = liveevents;
+	document.getElementsByClassName("liveEventsPct")[0].innerText = percentages(liveevents, tweet_array.length);
+
+	document.getElementsByClassName("achievements")[0].innerText = achievements;
+	document.getElementsByClassName("achievementsPct")[0].innerText = percentages(achievements, tweet_array.length);
+
+	document.getElementsByClassName("miscellaneous")[0].innerText = misc;
+	document.getElementsByClassName("miscellaneousPct")[0].innerText = percentages(misc, tweet_array.length);
 }
 
 //Wait for the DOM to load

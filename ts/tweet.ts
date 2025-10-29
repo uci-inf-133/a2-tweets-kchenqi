@@ -15,10 +15,10 @@ class Tweet {
         if (text.includes("completed") || text.includes("posted")) {
             return "completed_event";
         }
-        if (text.includes("Watch my")) {
+        if (text.includes("watch my")) {
             return "live_event";
         }
-        if (text.includes("Achieved")) {
+        if (text.includes("achieved")) {
             return "achievement"
         }
         return "miscellaneous";
@@ -35,6 +35,9 @@ class Tweet {
             return "";
         }
         //TODO: parse the written text from the tweet
+        let text = this.text;
+
+        text = text.replace("#RunKeeper", "")
         return "";
     }
 
