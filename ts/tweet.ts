@@ -79,16 +79,14 @@ class Tweet {
         //TODO: prase the distance from the text of the tweet
         const text = this.text.toLowerCase();
 
-        let index1 = text.indexOf(" km");
-        if (index1 !== -1) {
-            const number = text.slice(0, index1).split("");
-            return parseFloat(number.pop()!) / 1.609
+        const kmmatch = this.text.match(/([\d.]+)\s?km/);
+        if (kmmatch) {
+            return parseFloat(kmmatch[1]) / 1.609;
         }
 
-        let index2 = text.indexOf(" mi");
-        if (index2 !== -1) {
-            const number = text.slice(0, index2).split("");
-            return parseFloat(number.pop()!)
+        const mimatch = this.text.match(/([\d.]+)\s?mi/);
+            if (mimatch) {
+            return parseFloat(mimatch[1]);
         }
         return 0;
     }
