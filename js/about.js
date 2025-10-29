@@ -34,6 +34,9 @@ function parseTweets(runkeeper_tweets) {
 
 	document.getElementById("firstDate").innerText = earliest;
 	document.getElementById("lastDate").innerText = latest;
+
+	
+	document.getElementById("completedEvents").innerText = completed;
 }
 
 //Wait for the DOM to load
