@@ -39,12 +39,16 @@ function parseTweets(runkeeper_tweets) {
 	let liveevents = 0;
 	let achievements = 0;
 	let misc = 0;
+	let written = 0;
 
 	for (let i = 0; i < tweet_array.length; i++) {
 		const category = tweet_array[i].source;
 
 		if (category === "completed_event") {
 			completedevents++;
+			if (tweet_array[i].written) {
+				written++;
+			}
 		}
 		else if (category === "live_event") {
 			liveevents++;
@@ -72,6 +76,10 @@ function parseTweets(runkeeper_tweets) {
 
 	document.getElementsByClassName("miscellaneous")[0].innerText = misc;
 	document.getElementsByClassName("miscellaneousPct")[0].innerText = percentages(misc, tweet_array.length);
+
+	document.getElementsByClassName("completedEvents")[1].innerText = completedevents;
+	document.getElementsByClassName("written")[0].innerText = written;
+	document.getElementsByClassName("writtenPct")[0].innerText = percentages(written, completedevents);
 }
 
 //Wait for the DOM to load

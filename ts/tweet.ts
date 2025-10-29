@@ -27,29 +27,30 @@ class Tweet {
     //returns a boolean, whether the text includes any content written by the person tweeting.
     get written():boolean {
         //TODO: identify whether the tweet is written
-        let text = this.text;
-
-        text = text.replace(/#RunKeeper/gi, "")
-        text = text.replace(/https?:\/\/\S+/g, "");
-
-        text = text.trim();
-
-        return text.length > 0;
+        return this.writtenText.length > 0;
     }
 
     get writtenText():string {
-        if(!this.written) {
-            return "";
-        }
+        // if(!this.written) {
+        //     return "";
+        // }
         //TODO: parse the written text from the tweet
 
         let text = this.text;
 
-        text = text.replace(/#RunKeeper/gi, "")
-        text = text.replace(/https?:\/\/\S+/g, "");
+        const linkIndex = text.indexOf("https://");
+        let endIndex = text.length;
+        if (linkIndex !== -1) {
+            endIndex = linkIndex;
+        }
 
-        text = text.trim();
-        return text;
+        const dashIndex = text.indexOf("-");
+        if (dashIndex === -1) {
+           return "";
+        }
+        let written = text.slice(dashIndex + 3, endIndex);
+        written = written.replace(/#RunKeeper/, "");
+        return written.trim();
     }
 
     get activityType():string {
