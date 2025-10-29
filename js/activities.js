@@ -11,6 +11,35 @@ function parseTweets(runkeeper_tweets) {
 
 	//TODO: create a new array or manipulate tweet_array to create a graph of the number of tweets containing each type of activity.
 	
+	const completed = [];
+	const activitycount = {};
+	const stats = {};
+	const week = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+	for (let tweet of tweet_array) {
+		if (tweet.distance > 0 && tweet.activityType !== "other" && tweet.activityType !== "yoga") {
+			completed.push(tweet);
+
+			activitycount[tweet.activityType] = (activitycount[tweet.activityType] || 0) + 1;
+
+			if (!stats[tweet.activityType]) {
+				stats[tweet.activityType] = { distances: [], weekdays: [], weekends: [] };
+			}
+			stats[tweet.activityType].distances.push(tweet.distance);
+
+			const day = new Date(tweet.created_at).getDay();
+			if (day ===0 || day === 6) {
+				stats[tweet.activityType].weekends.push(tweet.distance);
+			}
+			else {
+				stats[tweet.activityType].weekdays.push(tweet.distance);
+			}
+		}
+	}
+
+	document.getElementById("numberActivities").textContent = completed.length;
+
+	
 
 	activity_vis_spec = {
 	  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
