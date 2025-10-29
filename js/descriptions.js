@@ -34,7 +34,7 @@ function addEventHandlerForSearch() {
 		if (userinput === "") {
 			searchCount.textContent = "???";
 			searchText.textContent = "???";
-			tweet.innerHTML = "";
+			tweetTable.innerHTML = "";
 			return;
 		}
 
@@ -45,7 +45,7 @@ function addEventHandlerForSearch() {
 
 		tweetTable.innerHTML = "";
 
-		for (let i = 0; i <matched.length; i++) {
+		for (let i = 0; i < matched.length; i++) {
 			const row = matched[i].getHTMLTableRow(i + 1);
 			tweetTable.innerHTML += row;
 		}

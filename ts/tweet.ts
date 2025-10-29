@@ -59,12 +59,10 @@ class Tweet {
         }
         //TODO: parse the activity type from the text of the tweet
         const text = this.text.toLowerCase();
-    
-        if (text.includes("ski run")) return "skiing";
-        if (text.includes("chair ride")) return "biking";
-        if (text.includes("run")) return "run";
+
         if (text.includes("walk")) return "walk";
-        if (text.includes("bike")) return "biking";
+        if (text.includes("chair ride") || text.includes("bike")) return "biking";
+        if (text.includes("run")) return "run";
         if (text.includes("yoga")) return "yoga";
         if (text.includes("swim")) return "swimming";
         if (text.includes("elliptical")) return "elliptical";
@@ -95,9 +93,9 @@ class Tweet {
         //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
         const links = this.text.replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>')
         return `<tr>
-                <td>${rowNumber}</td}
-                <td>${this.activityType}</td}
-                <td>${links}</td}
+                <td>${rowNumber}</td>
+                <td>${this.activityType}</td>
+                <td>${links}</td>
             </tr>`;
     }
 }
