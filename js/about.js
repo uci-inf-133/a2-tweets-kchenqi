@@ -35,8 +35,29 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementById("firstDate").innerText = earliest;
 	document.getElementById("lastDate").innerText = latest;
 
+	let completedevents = 0;
+	let liveevents = 0;
+	let achievements = 0;
+	let misc = 0;
+
+	for (let i = 0; i < tweet_array.length; i++) {
+		const category = tweet_array[i].source;
+
+		if (category === "completed_event") {
+			completedevents++;
+		}
+		else if (category === "live_event") {
+			liveevents++;
+		}
+		else if (category === "achievement") {
+			achievements++;
+		}
+		else {
+			misc++;
+		}
+	}
 	
-	document.getElementById("completedEvents").innerText = completed;
+	document.getElementsByClassName("completedEvents").innerText = completed;
 }
 
 //Wait for the DOM to load
