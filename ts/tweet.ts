@@ -27,7 +27,14 @@ class Tweet {
     //returns a boolean, whether the text includes any content written by the person tweeting.
     get written():boolean {
         //TODO: identify whether the tweet is written
-        return false;
+        let text = this.text;
+
+        text = text.replace(/#RunKeeper/gi, "")
+        text = text.replace(/https?:\/\/\S+/g, "");
+
+        text = text.trim();
+
+        return text.length > 0;
     }
 
     get writtenText():string {
@@ -35,10 +42,14 @@ class Tweet {
             return "";
         }
         //TODO: parse the written text from the tweet
+
         let text = this.text;
 
-        text = text.replace("#RunKeeper", "")
-        return "";
+        text = text.replace(/#RunKeeper/gi, "")
+        text = text.replace(/https?:\/\/\S+/g, "");
+
+        text = text.trim();
+        return text;
     }
 
     get activityType():string {
@@ -54,6 +65,8 @@ class Tweet {
             return 0;
         }
         //TODO: prase the distance from the text of the tweet
+        const text = this.text.toLowerCase();
+
         return 0;
     }
 
