@@ -58,7 +58,17 @@ class Tweet {
             return "unknown";
         }
         //TODO: parse the activity type from the text of the tweet
-        return "";
+        const text = this.text.toLowerCase();
+    
+        if (text.includes("ski run")) return "skiing";
+        if (text.includes("chair ride")) return "biking";
+        if (text.includes("run")) return "running";
+        if (text.includes("walk")) return "walking";
+        if (text.includes("bike")) return "biking";
+        if (text.includes("yoga")) return "yoga";
+        if (text.includes("swim")) return "swimming";
+
+        return "other";
     }
 
     get distance():number {
@@ -68,6 +78,17 @@ class Tweet {
         //TODO: prase the distance from the text of the tweet
         const text = this.text.toLowerCase();
 
+        let index1 = text.indexOf(" km");
+        if (index1 !== -1) {
+            const number = text.slice(0, index1).split("");
+            return parseFloat(number.pop()!) / 1.609
+        }
+
+        let index2 = text.indexOf(" mi");
+        if (index2 !== -1) {
+            const number = text.slice(0, index2).split("");
+            return parseFloat(number.pop()!)
+        }
         return 0;
     }
 
