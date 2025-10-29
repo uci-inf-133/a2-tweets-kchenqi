@@ -62,11 +62,12 @@ class Tweet {
     
         if (text.includes("ski run")) return "skiing";
         if (text.includes("chair ride")) return "biking";
-        if (text.includes("run")) return "running";
-        if (text.includes("walk")) return "walking";
+        if (text.includes("run")) return "run";
+        if (text.includes("walk")) return "walk";
         if (text.includes("bike")) return "biking";
         if (text.includes("yoga")) return "yoga";
         if (text.includes("swim")) return "swimming";
+        if (text.includes("elliptical")) return "elliptical";
 
         return "other";
     }

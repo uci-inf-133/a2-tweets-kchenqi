@@ -27,12 +27,14 @@ function addEventHandlerForSearch() {
 	const searchBox = document.getElementById("textFilter");
 	const searchCount = document.getElementById("searchCount");
 	const searchText = document.getElementById("searchText");
+	const tweetTable = document.getElementById("tweetTable");
 
 	searchBox.addEventListener("input", function() {
 		const userinput = searchBox.value.trim().toLowerCase();
 		if (userinput === "") {
 			searchCount.textContent = "???";
 			searchText.textContent = "???";
+			tweet.innerHTML = "";
 			return;
 		}
 
@@ -40,6 +42,13 @@ function addEventHandlerForSearch() {
 
 		searchCount.textContent = matched.length;
 		searchText.textContent = userinput;
+
+		tweetTable.innerHTML = "";
+
+		for (let i = 0; i <matched.length; i++) {
+			const row = matched[i].getHTMLTableRow(i + 1);
+			tweetTable.innerHTML += row;
+		}
 	});
 }
 
