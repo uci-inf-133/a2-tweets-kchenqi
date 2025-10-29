@@ -11,7 +11,7 @@ function parseTweets(runkeeper_tweets) {
 		return new Tweet(tweet.text, tweet.created_at);
 	});
 
-	let writtenText = [];
+	writtenText = [];
 	for (let i = 0; i < runkeeper_tweets.length; i++) {
 		const tweetData = runkeeper_tweets[i];
 		const tweet = new Tweet(tweetData.text, tweetData.created_at);
@@ -24,7 +24,23 @@ function parseTweets(runkeeper_tweets) {
 
 function addEventHandlerForSearch() {
 	//TODO: Search the written tweets as text is entered into the search box, and add them to the table
-	const searchBox = document.getElementById()
+	const searchBox = document.getElementById("textFilter");
+	const searchCount = document.getElementById("searchCount");
+	const searchText = document.getElementById("searchText");
+
+	searchBox.addEventListener("input", function() {
+		const userinput = searchBox.value.trim().toLowerCase();
+		if (userinput === "") {
+			searchCount.textContent = "???";
+			searchText.textContent = "???";
+			return;
+		}
+
+		const matched = writtenText.filter(function(tweet) { return tweet.text.toLowerCase().includes(userinput); });
+
+		searchCount.textContent = matched.length;
+		searchText.textContent = userinput;
+	});
 }
 
 //Wait for the DOM to load
